@@ -341,3 +341,10 @@ defimpl LangChain.ForOpenAIApi, for: LangChain.Message do
     }
   end
 end
+
+defimpl LangChain.ForReplicateApi, for: LangChain.Message do
+  alias LangChain.Message
+
+  def for_api(%Message{role: :assistant} = message), do: "[INST] #{message.content} [/INST]"
+  def for_api(%Message{} = message), do: message.content
+end
